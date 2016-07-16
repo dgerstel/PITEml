@@ -94,8 +94,8 @@ DIR = "../data/"  #  prefix directory to e.g. 'dane41.dat'
 
 c = FakeData() # tworzy nowy plik z sztucznie wygenerowanymi danymi
 c.generateFakeData(DIR+"dane41.dat", DIR+"danefake 1_2-1_5.dat", 50, [[1.2,1.5], [1.2,1.5], [1.2,1.5], [1.2,1.5]]) # losuje 40serii danych. Minimalne wartosci: mean +- 4*std. Maksymalne wartosci: mean +- 5*std
-c.generateFakeData(DIR+"dane41.dat", DIR+"danefake 1_5-1_7.dat", 50, [[1.5,1.7], [1.5,1.7], [1.5,1.7], [1.5,1.7]])
-c.generateFakeData(DIR+"dane41.dat", DIR+"danefake 1_7-2.dat", 50, [[1.7,2], [1.7,2], [1.7,2], [1.7,2]])
+c.generateFakeData(DIR+DIR+"dane41.dat", DIR+"danefake 1_5-1_7.dat", 50, [[1.5,1.7], [1.5,1.7], [1.5,1.7], [1.5,1.7]])
+c.generateFakeData(DIR+DIR+"dane41.dat", DIR+"danefake 1_7-2.dat", 50, [[1.7,2], [1.7,2], [1.7,2], [1.7,2]])
 c.generateFakeData(DIR+"dane41.dat", DIR+"danefake 1-2.dat", 50, [[1,2], [1,2], [1,2], [1,2]])
 c.generateFakeData(DIR+"dane41.dat", DIR+"danefake 2-3.dat", 50, [[2,3], [2,3], [2,3], [2,3]])
 c.generateFakeData(DIR+"dane41.dat", DIR+"danefake 3-4dat", 50, [[3,4], [3,4], [3,4], [3,4]])

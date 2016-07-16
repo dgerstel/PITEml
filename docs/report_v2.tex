@@ -1,0 +1,95 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath} 
+% \usepackage[T1]{fontenc}
+\usepackage{graphicx}
+%\documentclass{article}
+%\usepackage[showframe]{geometry}
+\usepackage{layout}
+\usepackage[margin=.75in]{geometry}
+%\usepackage{multirow}
+\usepackage{hhline} %for double hlines
+\usepackage{booktabs} %for all professional-looking table characterictics ;-)
+\usepackage{float}
+\restylefloat{table}
+\floatstyle{plaintop}
+\usepackage[tableposition=top]{caption}
+\renewcommand{\arraystretch}{1.5}
+
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-4pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+
+\lstset{language=Python, showspaces=false, showstringspaces=false, numbers=left, breaklines=true}
+
+\usepackage{epigraph}
+
+% Title Page
+\title{\textbf{Python in the enterprise} \\ Machine-learning-based silicon sensor quality evaluation}
+\author{Dawid Gerstel, Marcin Lis, Michał Łabuz, Konrad Zuchniak}
+
+\begin{document}
+\maketitle
+
+
+% \epigraph{No amount of experimentation can ever prove me right; a single experiment can prove me wrong.}{\textit{Albert Einstein}}
+
+\newpage
+
+\section{Introduction}
+
+The goal was to implement software for classifying silicon sensors as either good or bad ones. The k-nearest neighbours algorithm was to be used to assess a sensor's response 
+based upon a few attributes in the so-called feature space. These, in turn, were to be obtained in a preprocessing from sensor's response histograms in the ROOT framework.
+
+\section{Project organisation}
+At the beginning, the tasks were assigned to the authors of this report as follows:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}lc@{}} \toprule %\cline{3-6}
+\multicolumn{1}{c}{task}& person responsible \\ \toprule
+Analysis of the sensor's response histograms & all \\
+Choosing specific ML algorithm & all \\
+Histograming the measurements in the feature space & Dawid G. \\
+Extracting feature space attributes from the histograms & Dawid G. \\
+ML algorithm implementation & Michał Ł. \& Konrad Z. \\
+Testing accuracy of the algorithm & Marcin L. \\
+Results analysis and deciding about further plans & all \\
+\bottomrule
+\end{tabular}
+\caption{Summary of the tasks assigned to the team members at the project's start}
+\label{t:tasks}
+\end{table}
+
+\section{Project evolution}
+
+The input data come from the real silicon sensors of the LHCb's Vertex Locator. Each sensor taken into account has 2048 channels at which noise has been observed producing 2-dimensional histograms as in the Fig. \ref{f:2D}. Then, the former histogram was projected onto the y-axis and 1-dimensional histograms representing sensor's response (irrespective of its channels) were created (Fig. \ref{f:1D}). Then, from these distributions four parameters have been extracted, namely: mean, rms, skewness and kurtosis. These comprised the attributes for a machine learning algorithm. For any supervised learning it is mandatory to provide an adequate class label. Initially, we decided to approach classification as binary (either good or bad) with a perspective to develop a continuous and probabilistic classification to either category later on (if at all).
+
+
+After a brief analysis we agreed that all 42 (?) sensors are acceptable and we labelled them as '1' (good) class.
+
+
+Next, we simulated response of 'bad' sensors by shifting attributes of the 'good' ones... (specifically how...)
+
+A table summary of the results \\
+k neighbours | \% correct | train / test ...
+
+To make the algorithm more useful a probabilistic approach needs to be taken in which a percentage that a given sensor is acceptable is inferred.
+\footnote{This objective is, unfortunately, beyond the scope of the knn classifier.}
+To satisfy this requirement we came up with an idea of deriving quality estimate (0-100 \% range) based on a sensor's distance (in the feature space) from the most representative one -- so-called the benchmark sensor -- which could simply be represented by averaging all attributes of all good sensors dataset.
+
+% However, in due course, we have discovered the logistic regression classifier that yields probabilities of an instance's membership to given classes.
+
+
+
+
+
+
+\end{document}          
